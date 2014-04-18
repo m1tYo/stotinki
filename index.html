@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title></title>
+	<link rel="stylesheet/less" href="styles/main.less">
+
+	<script src="api/jquery.min.js"></script>
+	<script src="styles/less.min.js"></script>
+	
+	<script src="api/game.js"></script>
+	<script src="api/mainscript.js"></script>
+</head>
+
+<body>
+
+	<section id="gameContainer">
+		<div id="startScreen">
+			<p id="welcomeNote">нА ти стинки!</p>
+			<button id="startButton" class="gameSection clickToActionButton">Start Game</button>
+		</div>
+
+		<div id="game">
+			<div id="helperSection">
+				<div id="clues" class="helperSectionColumn">
+					<ul>
+						<li><button id="clueCall" onclick="help('call')">Смяна на въпроса</button></li>
+						<li><button id="clue50" onclick="help('50')">50:50</button></li>
+						<li style="margin-right:0px;"><button id="clueHelp" onclick="help('public')">Помощ</button></li>
+					</ul>
+					<div id="helperDataPublicAllElements">
+						<div id="helperDataPublicLabelsContainer">
+							<p class="helperDataPublicLabel" style="left:4%;">A(</p>
+							<p class="helperDataPublicLabel" style="left:28%;">B(</p>
+							<p class="helperDataPublicLabel" style="left:52%;">C(</p>
+							<p class="helperDataPublicLabel" style="left:76%;">D(</p>
+						</div>
+						<div id="helperDataPublicColumns">
+							<div class="helperColAns" id="colForA" style="left:4%;"></div>
+							<div class="helperColAns" id="colForB" style="left:28%;"></div>
+							<div class="helperColAns" id="colForC" style="left:52%;"></div>
+							<div class="helperColAns" id="colForD" style="left:76%;"></div>
+						</div>
+					</div>
+					<input onclick="quitGame();" class="callToActionButton" type="button" value="Прибирам си стинките" id="quitGame">
+				</div>
+
+				<div id="imageStateContainer" class="helperSectionColumn">
+					<img id="questionImage" src="images/question-mark.jpg">
+					<img src="images/correct.png" id="correctImage">
+					<img src="images/wrong.png" id="wrongImage">
+					<img src="images/winImage.png" id="winImage">
+					<p id="gameOverMessage">Вие ставате и се махате с <span id="stinkiQuantity"></span></p>
+				</div>
+
+				<div id="prizes" class="helperSectionColumn">
+					<ul class="gameSection">
+						<li class="safeSum"><span>100 000</span> стинки</li>
+						<li><span>50 000</span> стинки</li>
+						<li><span>25 000</span> стинки</li>
+						<li><span>10 000</span> стинки</li>
+						<li><span>5 000</span> стинки</li>
+						<li class="safeSum"><span>2 500</span> стинки</li>
+						<li><span>2 000</span> стинки</li>
+						<li><span>1 500</span> стинки</li>
+						<li><span>1 000</span> стинки</li>
+						<li><span>500</span> стинки</li>
+						<li class="safeSum"><span>250</span> стинки</li>
+						<li><span>200</span> стинки</li>
+						<li><span>150</span> стинки</li>
+						<li><span>100</span> стинки</li>
+						<li><span>50</span> стинки</li>
+						<li style="display:none;"><span>0</span> стинки</li>
+					</ul>
+				</div>
+			</div>
+			<div id="questionArea">
+				<button class="callToActionButton" id="newGame" style="display: none;margin-bottom:10px;" onclick="newGame()">Нова игра</button>
+				<p id="question" class="gameSection">
+					...
+				</p>
+				<ol id="answers">
+					<li class="leftAnswer"><a empty="0" onclick="answer(event)" id="ansA" class="gameSection" choice="1">&nbsp;</a></li>
+					<li class="rightAnswer"><a empty="0" onclick="answer(event)" id="ansB" class="gameSection" choice="2">&nbsp;</a></li>
+					<li class="leftAnswer"><a empty="0" onclick="answer(event)" id="ansC" class="gameSection" choice="3">&nbsp;</a></li>
+					<li class="rightAnswer"><a empty="0" onclick="answer(event)" id="ansD" class="gameSection" choice="4">&nbsp;</a></li>
+				</ol>
+				<div style="display:none" id="correctAns"></div>
+			</div>
+		</div>
+	</section>
+
+</body>
+</html>

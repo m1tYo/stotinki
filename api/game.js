@@ -56,27 +56,41 @@ function Player() {
 
 	this.selAns;
 	this.currQuestionPos;
+
+	/* stores how the player ends his game
+		3 types: win, lose, quit
+	*/
 	this.endGame;
+
 	this.currSum;
 	this.safeSum;
+
+	/* stores current difficulty -> easy, normal, hard */
 	this.diff;
+
+	/* stores current position at every difficulty 0-4 */
 	this.diffPos;
+
 	this.win = false;
 
 	this.helper50Used = false;
 	this.helperCallUsed = false;
 	this.helperPublicUsed = false;
 
-	// variables to store data when 50/50 is used
 	this.helper50UsedAtPos;
+	this.helperPublicUsedAtPos;
+	this.helperCallUsedAtPos;
+	
+	// variables to store data when 50/50 is used
 	this.helper50Wrong1;
 	this.helper50Wrong2;
+
 
 	this.questionUp = function(pos) {
 		if(pos >= 1) {
 			$("#prizes li:nth-child(" + pos + ")").css("background-image", "url('images/prize-pointer.png')");
 			this.currSum = $("#prizes ul li:nth-child(" + (pos+1) + ") span").text();
-		} else {
+		} else { //win
 			$("#imageStateContainer img").css("display", "none");
 			$("#winImage").fadeIn('fast');
 
@@ -85,6 +99,15 @@ function Player() {
 
 			$("#stinkiQuantity").text(player.safeSum + " стинки!");
 			$("#gameOverMessage").fadeIn('fast');
+			manageAttribute("#cluePublic, #clue50, #clueCall", "remove", "onclick", "");
+		}
+
+		if(this.helper50Used && this.helper50UsedAtPos == pos+1) {
+			removeHelperData('50');
+		}
+
+		if(this.helperPublicUsed && this.helperPublicUsedAtPos == pos+1) {
+			removeHelperData('public');
 		}
 	}
 
@@ -100,7 +123,7 @@ function Player() {
 			$("#answers li:nth-child(" +  arrWrongAns[i] + ") a").text(" ").removeAttr("onclick").attr("empty", "1");
 		}
 
-		$("#clue50").css("background-position", "-200px -200px").removeAttr("onclick").off();
+		disableHelper("#clue50");
 
 		this.helper50Wrong1 = arrWrongAns[0];
 		this.helper50Wrong2 = arrWrongAns[1];
@@ -109,9 +132,9 @@ function Player() {
 	}
 
 	this.helperPublic = function(correctAns) {
-		var arrAnsLabels = ["A", "B", "C", "D"];
-		var fullPercentage = 100;
-		var arrAnsPerc = [-1, -1, -1, -1];
+		var arrAnsLabels = ["A", "B", "C", "D"],
+			 fullPercentage = 100,
+			 arrAnsPerc = [-1, -1, -1, -1];
 		
 		// get most probable value
 		switch(this.diff) {
@@ -154,8 +177,13 @@ function Player() {
 			$("#helperDataPublicColumns div:nth-child("+(i+1)+")").animate({height : (arrAnsPerc[i]*2+"px")});
 		}
 
-	$("#clueHelp").css("background-position", "-200px -100px").removeAttr("onclick").off();
+		disableHelper("#cluePublic");
 
-	this.helperPublicUsed = true;
+		this.helperPublicUsed = true;
+		this.helperPublicUsedAtPos = this.currQuestionPos;
+	}
+
+	this.helperCall = function(correctAns) {
+		alert("Call a friend!");
 	}
 }

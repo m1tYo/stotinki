@@ -5,54 +5,42 @@ var player = new Player();
 
 /* END GLOBAL VARIABLES */
 
-function resetHelpers() {
-	if(player.helper50Used) {
-		$("#clue50").attr("onclick", "help('50')").css("background-position", "0px -200px").hover(function() {
-			$(this).css("background-position", "-100px -200px");
-		}, function() {
-			$(this).css("background-position", "0px -200px");
-		});
-	}
+function changeDifficulty(nextDiff) {
+	player.diffPos = 0;
+	player.diff = nextDiff;
+	player.safeSum = $("#prizes ul li:nth-child(" + (player.currQuestionPos+1) + ") span").text();
+	game.questionSet = game.getQuestionSet(player.diff);
 }
 
 function help(helperType) {
+	var correctAns = $("#correctAns").text();
 	switch(helperType) {
 		case "call":
-			player.helperCall(game.questionSet.set[player.diffPos].correctAns);
+			player.helperCall(correctAns);
 			break;
 		case "50":
-			player.helper50(game.questionSet.set[player.diffPos].correctAns);
-			console.log(player);
+			player.helper50(correctAns);
 			break;
 		case "public":	
-			player.helperPublic(game.questionSet.set[player.diffPos].correctAns);
-			break;
-	}
-}
-
-function manageAttribute(action, htmlObject, attr, value) {
-	switch(action) {
-		case "remove":
-			$(htmlObject).removeAttr(attr);
-			break;
-		case "set":
-			$(htmlObject).attr(attr, value);		
+			player.helperPublic(correctAns);
 			break;
 	}
 }
 
 function quitGame() {
+	var correctAns = $("#correctAns").text();
 	player.endGame = "quit";
 	$("#stinkiQuantity").text(player.currSum + " стинки!");
 	$("#gameOverMessage").fadeIn('fast');
-	manageAttribute("remove", "answers li a, #quitGame", "onclick", "");
-	game.gameOver(game.questionSet.set[player.diffPos].correctAns, player.endGame);
+	manageAttribute("remove", "#answers li a, #quitGame", "onclick", "");
+	game.gameOver(correctAns, player.endGame);
 }
 
 function answer(event) {
 	player.selAnswer = $(event.target).attr("choice");
+	var correctAns = $("#correctAns").text();
 
-	if(game.correctAnswer(game.questionSet.set[player.diffPos].correctAns, player.selAnswer)) {
+	if(game.correctAnswer(correctAns, player.selAnswer)) { //if correct answer
 		manageAttribute("remove", "#answers li a", "onclick", "");
 
 		$("#questionImage").fadeOut("fast", function() {
@@ -63,19 +51,13 @@ function answer(event) {
 				player.diffPos++;
 
 				if(player.currQuestionPos == 10) {
-					player.diffPos = 0;
-					player.diff = "normal";
-					player.safeSum = $("#prizes ul li:nth-child(" + (player.currQuestionPos+1) + ") span").text();
-					game.questionSet = game.getQuestionSet(player.diff);
+					changeDifficulty("normal");
 				} else if(player.currQuestionPos == 5) {
-					player.diffPos = 0;
-					player.diff = "hard";
-					player.safeSum = $("#prizes ul li:nth-child(" + (player.currQuestionPos+1) + ") span").text();
-					game.questionSet = game.getQuestionSet(player.diff);
-				} else if(player.currQuestionPos == 0) {
+					changeDifficulty("hard");
+				} else if(player.currQuestionPos == 0) { // win!
 					player.win = true;
 					player.safeSum = $("#prizes ul li:nth-child(" + (player.currQuestionPos+1) + ") span").text();
-					manageAttribute("remove", "id", "#quitGame", "onclick", "");
+					manageAttribute("remove", "#quitGame", "onclick", "");
 				}
 
 				player.questionUp(player.currQuestionPos);
@@ -101,7 +83,7 @@ function answer(event) {
 
 		manageAttribute("remove", "#answers li a, #quitGame", "onclick", "");
 		player.endGame = "lose";
-		game.gameOver(game.questionSet.set[player.diffPos].correctAns, player.endGame);
+		game.gameOver(correctAns, player.endGame);
 	}
 }
 
@@ -115,6 +97,10 @@ function resetPlayerStats() {
 	player.helperCallUsed = false;
 	player.helper50Used = false;
 	player.helperPublicUsed = false;
+
+	player.helper50UsedAtPos = null;
+	player.helperPublicUsedAtPos = null;
+	player.helperCallUsedAtPos = null;
 }
 
 function startGame() {
@@ -146,7 +132,25 @@ function newGame() {
 		if(player.win) {
 			$("#winImage").css("display", "none");
 		}
-		resetHelpers();
+
+		//RESET HELPERS (IF SET) SECTION
+
+		var arrHTMLIds = ["#clue50", "#cluePublic", "#clueCall"],
+			 arrDefBgPos = ["0px -200px", "0px -100px", "0px 0px"],
+			 arrHoverBgPos = ["-100px -200px", "-100px -100px", "-100px 0px"];
+
+		for(var i=0; i<3; i++) {
+			resetHelper(arrHTMLIds[i], arrDefBgPos[i], arrHoverBgPos[i]);
+		}
+
+		if(player.helper50Used) {
+			removeHelperData("50");
+		}
+		if(player.helperPublicUsed) {
+			removeHelperData("public");
+		}
+
+		//END RESET HELPERS SECTION
 		startGame();
 	});
 }

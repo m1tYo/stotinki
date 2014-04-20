@@ -99,7 +99,7 @@ function Player() {
 
 			$("#stinkiQuantity").text(player.safeSum + " стинки!");
 			$("#gameOverMessage").fadeIn('fast');
-			manageAttribute("#cluePublic, #clue50, #clueCall", "remove", "onclick", "");
+			manageAttribute("remove", "#cluePublic, #clue50, #clueCall", "onclick", "");
 		}
 
 		if(this.helper50Used && this.helper50UsedAtPos == pos+1) {
@@ -184,6 +184,9 @@ function Player() {
 	}
 
 	this.helperCall = function(correctAns) {
-		alert("Call a friend!");
+		
+
+		this.helperCallUsed = true;
+		this.helperCallUsedAtPos = this.currQuestionPos;
 	}
 }

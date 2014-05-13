@@ -26,9 +26,9 @@
 			<div id="helperSection">
 				<div id="clues" class="helperSectionColumn">
 					<ul>
+						<li><button id="cluePublic" onclick="help('public')">Помощ</button></li>
 						<li><button id="clueCall" onclick="help('call')">Смяна на въпроса</button></li>
-						<li><button id="clue50" onclick="help('50')">50:50</button></li>
-						<li style="margin-right:0px;"><button id="cluePublic" onclick="help('public')">Помощ</button></li>
+						<li style="margin-right:0px;"><button id="clue50" onclick="help('50')">50:50</button></li>
 					</ul>
 					<div id="helperDataPublicAllElements">
 						<div id="helperDataPublicLabelsContainer">
@@ -49,7 +49,7 @@
 						<div class="balloon"></div>
 						<div class="balloon"></div>
 						<div class="balloon"></div>
-						<p id="callResponse">Убеден съм, че верният отговор е С</p>
+						<p class="balloon" id="callResponse"></p>
 					</div>
 					<input onclick="quitGame();" class="callToActionButton" type="button" value="Прибирам си стинките" id="quitGame">
 				</div>

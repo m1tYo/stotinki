@@ -165,4 +165,6 @@ $(document).ready(function() {
 		});
 	});
 
+	$("#startButton").trigger("click");
+
 });

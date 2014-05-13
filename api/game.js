@@ -184,7 +184,54 @@ function Player() {
 	}
 
 	this.helperCall = function(correctAns) {
-		
+		correctAns = parseInt(correctAns);
+		var answers = ['A', 'B', 'C', 'D'];
+
+		var sureAns = [
+			"Убеден съм, че верният отговор е <span style=\"font-weight:bold;\">%ans%</span>.",
+			"Със сигурност верният отговор е <span style=\"font-weight:bold;\">%ans%</span>.",
+			"Категорично <span style=\"font-weight:bold;\">%ans%</span> e правилният отговор."
+		];
+
+		var hesitateAns = [
+			"Мисля, че верният отговор е <span style=\"font-weight:bold;\">%ans%</span>, но не съм напълно убеден.",
+			"Не съм сигурен, но най-вероятно е <span style=\"font-weight:bold;\">%ans%</span>.",
+			"Предполагам, че правилното е <span style=\"font-weight:bold;\">%ans%</span>."
+		];
+
+		var callResponse;
+
+		/** decide whether or not to give the right answer 
+		*1->hesitate, 0->no hesitate
+		* boolean
+		*/
+		var hesitateOrNot;
+		if(this.diff == 'easy') {
+
+			callResponse = sureAns[Math.floor(Math.random()*3)];
+			callResponse = callResponse.replace("%ans%", answers[correctAns-1]);
+
+		} else if(this.diff == 'normal'){
+
+			hesitateOrNot = Math.floor(Math.random()*2);
+			if(hesitateOrNot) {
+				callResponse = hesitateAns[Math.floor(Math.random()*3)];
+				callResponse = callResponse.replace("%ans%", answers[Math.floor(Math.random()*4)])
+			} else {
+				callResponse = sureAns[Math.floor(Math.random()*3)];
+				callResponse = callResponse.replace("%ans%", answers[correctAns-1]);
+			}
+
+
+		} else { //if hard
+
+			callResponse = hesitateAns[Math.floor(Math.random()*3)];
+			callResponse = callResponse.replace("%ans%", answers[Math.floor(Math.random()*4)]);
+		}
+
+
+		$("#helperCallElements p#callResponse").html(callResponse);
+		$("#helperCallElements").fadeIn('fast');
 
 		this.helperCallUsed = true;
 		this.helperCallUsedAtPos = this.currQuestionPos;

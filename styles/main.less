@@ -111,7 +111,7 @@ body {
 					width:350px;
 					li {
 						float: left;
-						margin-right:10px;
+						margin-right:20px;
 
 						button {
 							width:100px;
@@ -185,41 +185,37 @@ body {
 					#helperCallElements {
 						display: none;
 						clear: both;
-						position: relative;
-						border: 2px solid red;
-						overflow: visible;
-						div.balloon {
+						div.balloon, p.balloon {
 							padding: 5px;
 							border:2px solid #ccc;
-							position: absolute;
-							top:10px;
-							left:10px;
 							border-radius: 10px;
+							margin: 2px auto 0;
+						}
+						div.balloon:nth-child(1) {
+							width:3px;
+							height:3px;
 						}
 						div.balloon:nth-child(2) {
-							padding: 8px;
-							top:20px;
-							left:20px;
+							width:8px;
+							height:8px;
 						}
 						div.balloon:nth-child(3) {
-							padding: 12px;
-							top:35px;
-							left:35px;
+							width:16px;
+							height:16px;
 						}
 						div.balloon:nth-child(4) {
-							padding: 15px;
-							top:60px;
-							left:60px;
+							width:24px;
+							height:24px;
 						}
 						#callResponse {
+							span {
+								color:#000;
+							}
 							color: #000;
-							position: absolute;
-							top:90px;
-							// width: 100%;
 							text-align: center;
-							border:2px solid #ccc;
 							padding: 20px;
-							border-radius: 10px;
+							margin-top:2px;
+							margin-bottom:10px;
 						}
 					}
 				}

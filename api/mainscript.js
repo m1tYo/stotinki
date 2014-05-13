@@ -40,8 +40,9 @@ function answer(event) {
 	player.selAnswer = $(event.target).attr("choice");
 	var correctAns = $("#correctAns").text();
 
+	manageAttribute("remove", "#answers li a, #quitGame", "onclick", "");
+
 	if(game.correctAnswer(correctAns, player.selAnswer)) { //if correct answer
-		manageAttribute("remove", "#answers li a", "onclick", "");
 
 		$("#questionImage").fadeOut("fast", function() {
 			$("#correctImage").fadeIn("fast");

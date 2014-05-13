@@ -90,6 +90,8 @@ function Player() {
 		if(pos >= 1) {
 			$("#prizes li:nth-child(" + pos + ")").css("background-image", "url('images/prize-pointer.png')");
 			this.currSum = $("#prizes ul li:nth-child(" + (pos+1) + ") span").text();
+			manageAttribute("set", "#quitGame", "onclick", "quitGame()");
+			manageAttribute("set", "#answers li a", "onclick", "answer(event)");
 		} else { //win
 			$("#imageStateContainer img").css("display", "none");
 			$("#winImage").fadeIn('fast');

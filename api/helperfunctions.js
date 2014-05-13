@@ -12,6 +12,7 @@ function manageAttribute(action, htmlObject, attr, value) {
 function disableHelper(helper) {
 	$(helper).css("background-position-x", "-=100px");
 	manageAttribute("remove", helper, "onclick", "");
+	$(helper).unbind('mouseenter mouseleave');
 }
 
 function resetHelper(htmlID, defaultBgPos, hoverBgPos) {
@@ -44,5 +45,7 @@ function removeHelperData(helper) {
 		$("#answers li a").attr("empty", "0");
 	} else if(helper == 'public') {
 		$("#helperDataPublicAllElements").fadeOut('fast');
+	} else {
+		$("#helperCallElements").fadeOut('fast');
 	}
 }

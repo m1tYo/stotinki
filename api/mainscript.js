@@ -149,6 +149,9 @@ function newGame() {
 		if(player.helperPublicUsed) {
 			removeHelperData("public");
 		}
+		if(player.helperCallUsed) {
+			removeHelperData("call");
+		}
 
 		//END RESET HELPERS SECTION
 		startGame();
@@ -164,7 +167,5 @@ $(document).ready(function() {
 			});
 		});
 	});
-
-	$("#startButton").trigger("click");
 
 });

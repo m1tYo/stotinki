@@ -109,6 +109,10 @@ function Player() {
 		if(this.helperPublicUsed && this.helperPublicUsedAtPos == pos+1) {
 			removeHelperData('public');
 		}
+
+		if(this.helperCallUsed && this.helperCallUsedAtPos == pos+1) {
+			removeHelperData('call');
+		}
 	}
 
 	this.helper50 = function(correctAns) {
@@ -149,6 +153,11 @@ function Player() {
 				break;
 		}
 		fullPercentage -= arrAnsPerc[correctAns-1];
+
+		//hide div if helperCall used for same question
+		if(this.helperCallUsed || this.helperCallUsedAtPos == this.currQuestionPos) {
+			$("#helperCallElements").fadeOut('fast');
+		}
 
 		// show whole div that stores the columns
 		$("#helperDataPublicAllElements").fadeIn('fast', function() {
@@ -215,9 +224,20 @@ function Player() {
 
 			hesitateOrNot = Math.floor(Math.random()*2);
 			if(hesitateOrNot) {
+				
+				var rand = Math.floor(Math.random()*4);
+				//escape non-existing answers if 50/50 used
+				if(this.helper50Used == true && this.helper50UsedAtPos == this.currQuestionPos) {
+					while(rand == (this.helper50Wrong1-1) || rand == (this.helper50Wrong2-1)) {
+						rand = Math.floor(Math.random()*4);
+					}
+				} 
 				callResponse = hesitateAns[Math.floor(Math.random()*3)];
-				callResponse = callResponse.replace("%ans%", answers[Math.floor(Math.random()*4)])
+				
+				callResponse = callResponse.replace("%ans%", answers[rand]);
+
 			} else {
+
 				callResponse = sureAns[Math.floor(Math.random()*3)];
 				callResponse = callResponse.replace("%ans%", answers[correctAns-1]);
 			}
@@ -225,13 +245,28 @@ function Player() {
 
 		} else { //if hard
 
+			//escape non-existing answers if 50/50 used
+			var rand = Math.floor(Math.random()*4);
+			if(this.helper50Used == true && this.helper50UsedAtPos == this.currQuestionPos) {
+				while(rand == (this.helper50Wrong1-1) || rand == (this.helper50Wrong2-1)) {
+					rand = Math.floor(Math.random()*4);
+				}
+			} 
+
 			callResponse = hesitateAns[Math.floor(Math.random()*3)];
-			callResponse = callResponse.replace("%ans%", answers[Math.floor(Math.random()*4)]);
+			callResponse = callResponse.replace("%ans%", answers[rand]);
+		}
+
+		//hide div if helperPublic used for same question
+		if(this.helperPublicUsed || this.helperPublicUsedAtPos == this.currQuestionPos) {
+			$("#helperDataPublicAllElements").fadeOut('fast');
 		}
 
 
 		$("#helperCallElements p#callResponse").html(callResponse);
 		$("#helperCallElements").fadeIn('fast');
+
+		disableHelper("#clueCall");
 
 		this.helperCallUsed = true;
 		this.helperCallUsedAtPos = this.currQuestionPos;

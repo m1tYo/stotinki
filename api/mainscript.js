@@ -32,7 +32,7 @@ function quitGame() {
 	player.endGame = "quit";
 	$("#stinkiQuantity").text(player.currSum + " стинки!");
 	$("#gameOverMessage").fadeIn('fast');
-	manageAttribute("remove", "#answers li a, #quitGame", "onclick", "");
+	manageAttribute("remove", "#answers li a, #quitGame, #cluePublic, #clueCall, #clue50", "onclick", "");
 	game.gameOver(correctAns, player.endGame);
 }
 

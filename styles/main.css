@@ -1,0 +1,254 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: 1em Georgia, serif;
+  color: #fff;
+}
+* ul {
+  list-style-type: none;
+}
+html,
+body {
+  min-height: 100%;
+}
+body {
+  background: url("../images/mainbg.jpg");
+  background-size: 600px 600px;
+}
+body #gameContainer {
+  width: 80%;
+  margin: 10px auto;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: 10px;
+  overflow: hidden;
+  min-height: 500px;
+}
+body #gameContainer #startScreen {
+  margin-top: 100px;
+}
+body #gameContainer #startScreen #welcomeNote {
+  color: #386C12;
+  font: italic bold 3em Georgia, serif;
+  text-shadow: 2px 2px 3px #284513;
+  text-align: center;
+}
+body #gameContainer #startScreen #startButton {
+  font-size: 2em;
+  padding: 40px 60px;
+  border: 2px solid #C49D00;
+  border-radius: 5px;
+  background-color: #E6C440;
+  display: block;
+  margin: 150px auto 0;
+}
+body #gameContainer #startScreen #startButton:hover {
+  background-color: #C49D00;
+  cursor: pointer;
+}
+body #gameContainer #game {
+  display: none;
+}
+body #gameContainer #game .callToActionButton {
+  display: block;
+  padding: 10px 15px;
+  background-color: #E6C440;
+  border: 2px solid #C49D00;
+  color: #fff;
+  margin: 0 auto;
+  border-radius: 5px;
+}
+body #gameContainer #game .callToActionButton:hover {
+  background-color: #C49D00;
+  cursor: pointer;
+}
+body #gameContainer #game #helperSection {
+  margin-bottom: 20px;
+  overflow: hidden;
+  position: relative;
+  min-height: 350px;
+}
+body #gameContainer #game #helperSection .helperSectionColumn {
+  width: 30%;
+  overflow: visible;
+  margin-right: 3%;
+  float: left;
+  border: 1px solid transparent;
+}
+body #gameContainer #game #helperSection #imageStateContainer {
+  text-align: center;
+}
+body #gameContainer #game #helperSection #imageStateContainer #questionImage {
+  border: 2px solid #ccc;
+  border-radius: 5px;
+}
+body #gameContainer #game #helperSection #imageStateContainer #correctImage,
+body #gameContainer #game #helperSection #imageStateContainer #wrongImage,
+body #gameContainer #game #helperSection #imageStateContainer #winImage {
+  display: none;
+  margin-top: 30px;
+}
+body #gameContainer #game #helperSection #imageStateContainer #gameOverMessage {
+  color: #000;
+  display: none;
+  margin-top: 10px;
+}
+body #gameContainer #game #helperSection #imageStateContainer #gameOverMessage #stinkiQuantity {
+  font-weight: bold;
+  color: #000;
+}
+body #gameContainer #game #helperSection #clues {
+  width: 350px;
+}
+body #gameContainer #game #helperSection #clues li {
+  float: left;
+  margin-right: 20px;
+}
+body #gameContainer #game #helperSection #clues li button {
+  width: 100px;
+  height: 100px;
+  text-indent: -9999px;
+}
+body #gameContainer #game #helperSection #clues li button:hover {
+  cursor: pointer;
+}
+body #gameContainer #game #helperSection #clues li button:focus {
+  outline: none;
+}
+body #gameContainer #game #helperSection #clues #clueCall {
+  background: url("../images/helpers.png") no-repeat 0px 0px;
+}
+body #gameContainer #game #helperSection #clues #clueCall:hover {
+  background-position: -100px 0px;
+}
+body #gameContainer #game #helperSection #clues #clue50 {
+  background: url("../images/helpers.png") no-repeat 0px -200px;
+}
+body #gameContainer #game #helperSection #clues #clue50:hover {
+  background-position: -100px -200px;
+}
+body #gameContainer #game #helperSection #clues #cluePublic {
+  background: url("../images/helpers.png") no-repeat 0px -100px;
+}
+body #gameContainer #game #helperSection #clues #cluePublic:hover {
+  background-position: -100px -100px;
+}
+body #gameContainer #game #helperSection #clues #helperDataPublicAllElements {
+  display: none;
+  clear: both;
+  position: relative;
+  height: 250px;
+  border-bottom: 2px solid #116414;
+  margin-bottom: 10px;
+}
+body #gameContainer #game #helperSection #clues #helperDataPublicAllElements #helperDataPublicLabelsContainer .helperDataPublicLabel {
+  display: none;
+  position: absolute;
+  bottom: 0px;
+  width: 20%;
+  text-align: center;
+  color: #000;
+  padding: 15px 0px;
+  line-height: 10px;
+  font-size: 10px;
+  font-weight: bold;
+  font-style: italic;
+}
+body #gameContainer #game #helperSection #clues #helperDataPublicAllElements #helperDataPublicColumns .helperColAns {
+  position: absolute;
+  height: 0px;
+  bottom: 0px;
+  width: 20%;
+  background-color: #116414;
+}
+body #gameContainer #game #helperSection #clues #helperCallElements {
+  display: none;
+  clear: both;
+}
+body #gameContainer #game #helperSection #clues #helperCallElements div.balloon,
+body #gameContainer #game #helperSection #clues #helperCallElements p.balloon {
+  padding: 5px;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  margin: 2px auto 0;
+}
+body #gameContainer #game #helperSection #clues #helperCallElements div.balloon:nth-child(1) {
+  width: 3px;
+  height: 3px;
+}
+body #gameContainer #game #helperSection #clues #helperCallElements div.balloon:nth-child(2) {
+  width: 8px;
+  height: 8px;
+}
+body #gameContainer #game #helperSection #clues #helperCallElements div.balloon:nth-child(3) {
+  width: 16px;
+  height: 16px;
+}
+body #gameContainer #game #helperSection #clues #helperCallElements div.balloon:nth-child(4) {
+  width: 24px;
+  height: 24px;
+}
+body #gameContainer #game #helperSection #clues #helperCallElements #callResponse {
+  color: #000;
+  text-align: center;
+  padding: 20px;
+  margin-top: 2px;
+  margin-bottom: 10px;
+}
+body #gameContainer #game #helperSection #clues #helperCallElements #callResponse span {
+  color: #000;
+}
+body #gameContainer #game #helperSection #prizes {
+  float: right;
+  margin-right: 0;
+  width: auto;
+}
+body #gameContainer #game #helperSection #prizes ul li {
+  margin-left: -17px;
+  padding: 2px 2px 2px 23px;
+  background-repeat: no-repeat;
+  background-position: 0px 4px;
+}
+body #gameContainer #game #helperSection #prizes ul li.safeSum,
+body #gameContainer #game #helperSection #prizes ul li.safeSum span {
+  font: italic bold 1em Georgia;
+}
+body #gameContainer #game .gameSection {
+  background-color: #386C12;
+  padding: 15px;
+  border: 2px solid #284513;
+  border-radius: 5px;
+}
+body #gameContainer #game #questionArea {
+  clear: both;
+  display: none;
+}
+body #gameContainer #game #questionArea #question {
+  text-align: left;
+  text-indent: 1em;
+}
+body #gameContainer #game #questionArea #answers {
+  list-style-type: upper-alpha;
+  list-style-position: inside;
+  width: 90%;
+  margin: 0 auto;
+}
+body #gameContainer #game #questionArea #answers li {
+  margin-top: 10px;
+  width: 48%;
+}
+body #gameContainer #game #questionArea #answers li.leftAnswer {
+  float: left;
+}
+body #gameContainer #game #questionArea #answers li.rightAnswer {
+  float: right;
+}
+body #gameContainer #game #questionArea #answers li a {
+  display: block;
+  height: 100%;
+}
+body #gameContainer #game #questionArea #answers li a:hover {
+  cursor: pointer;
+  background-color: #284513;
+}
